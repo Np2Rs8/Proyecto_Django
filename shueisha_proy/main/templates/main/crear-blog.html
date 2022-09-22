@@ -1,0 +1,231 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Manga Plus - Crear blogs</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: eBusiness - v4.8.0
+  * Template URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  {% include 'main/partials/messages.html' %}
+  
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+      <div class="container d-flex justify-content-between">
+  
+        <div class="logo">
+          <!--<h1><a href="{% url 'main:home' %}">Manga<span>+</span>Shueisha</a></h1>-->
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <a href="{% url 'main:home' %}"><img src="{% static 'assets/img/logo.png' %}" alt="" class="img-fluid"></a>
+        </div>
+  
+        <nav id="navbar" class="navbar">
+  
+          <ul>
+  
+            <li><a class="nav-link scrollto" href="{% url 'main:home' %}">Inicio</a></li>
+            <li><a class="nav-link scrollto" href="https://mangaplus.shueisha.co.jp/manga_list/all">Animes</a></li>
+            <li><a class="nav-link scrollto" href="https://mangaplus.shueisha.co.jp/manga_list/all">Mangas</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'main:blogs' %}">Blogs</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'main:reviews' %}">Reviews</a></li>
+  
+            <li class="dropdown"><a class="active" href="{% url 'main:blogs-upload' %}"><span>Crear</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a class="active" href="{% url 'main:blogs-upload' %}">Crear blogs</a></li>
+                <li><a class="nav-link scrollto" href="{% url 'main:reviews-upload' %}">Crear reviews</a></li>
+              </ul>
+            </li>
+  
+            {% if request.user.is_authenticated %}
+            <li class="dropdown"><a href="{% url 'main:blogs-upload' %}"><span>{{request.user}}</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a class="nav-link scrollto" href="{% url 'main:logout' %}">Cerrar sesión</a></li>
+              </ul>
+            </li>
+            {% else %}
+  
+            <li class="dropdown"><a href="{% url 'main:blogs-upload' %}"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a class="nav-link scrollto" href="{% url 'main:login' %}">Iniciar Sesión</a></li>
+                <li><a class="nav-link scrollto" href="{% url 'main:register' %}">Registrar</a></li>
+              </ul>
+            </li>
+            
+            {% endif %}
+            
+          </ul>
+  
+  
+  
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+  
+      </div>
+    </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Blog Header ======= -->
+    <div class="header-bg page-area">
+      <div class="container position-relative">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="slider-content text-center">
+              <div class="header-bottom">
+                <div class="layer2">
+                  <h1 class="title2">BLOGS</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Blog Header -->
+
+    <!-- ======= Blog Page ======= -->
+    <div class="blog-page area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="page-head-blog">
+              <div class="single-blog-page"></div>
+            </div>
+          </div>
+          <!-- End left sidebar -->
+          <!-- Start single blog -->
+
+
+          <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="row">
+
+              <section>
+                <div class="innerPageBannerCol">
+                  <div class="container">
+                    <div class="row g-4 g-md-3  align-items-center">
+                      <div class="col-md-6">
+                        <div class="bannerContent">
+                          <h1 class="xlTitle pb-md-3">Crea tu blog</h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              
+              <section>
+                <div class="lightBg">
+                  <div class="container">
+                    <div class="form-group">
+                      <form id="BlogForm" method="POST" action="/blog-upload/" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                          <label for="author">Autor:</label>
+                          <input class="form-control" id="author" name="author" type="text" value="{{request.user}}" readonly>
+                          </br>
+
+                          <label for="name">Nombre:</label>
+                          {{form.name}}
+                          </br>
+
+                          <label for="decription">Descripción:</label>
+                          {{form.description}}
+                          </br>
+
+                          <label for="body">Blog:</label>
+                          {{form.body}}
+
+                          </br>
+                          <label for="image">Imagen:</label>
+                          {{form.image}}
+
+                          </br></br>
+                          <input class='btn btnPrimary' type="submit" value="Enviar">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+
+
+
+              <!-- End single blog -->
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>Manga Plus by Shueisha</strong>. All Rights Reserved
+              </p>
+            </div>
+            <div class="credits">
+              <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
+            -->
+              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

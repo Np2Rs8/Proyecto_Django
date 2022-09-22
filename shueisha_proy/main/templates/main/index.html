@@ -1,0 +1,488 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Manga Plus - by Shueisha</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: eBusiness - v4.8.0
+  * Template URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+      <div class="logo">
+        <!--<h1><a href="{% url 'main:home' %}">Manga<span>+</span>Shueisha</a></h1>-->
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a href="{% url 'main:home' %}"><img src="{% static 'assets/img/logo.png' %}" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+
+        <ul>
+
+          <li><a class="active" href="{% url 'main:home' %}">Inicio</a></li>
+          <li><a class="nav-link scrollto" href="https://mangaplus.shueisha.co.jp/manga_list/all">Animes</a></li>
+          <li><a class="nav-link scrollto" href="https://mangaplus.shueisha.co.jp/manga_list/all">Mangas</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main:blogs' %}">Blogs</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'main:reviews' %}">Reviews</a></li>
+
+          <li class="dropdown"><a href="{% url 'main:blogs-upload' %}"><span>Crear</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a class="nav-link scrollto" href="{% url 'main:blogs-upload' %}">Crear blogs</a></li>
+              <li><a class="nav-link scrollto" href="{% url 'main:reviews-upload' %}">Crear reviews</a></li>
+            </ul>
+          </li>
+
+          {% if request.user.is_authenticated %}
+          <li class="dropdown"><a href="{% url 'main:blogs-upload' %}"><span>{{request.user}}</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a class="nav-link scrollto" href="{% url 'main:logout' %}">Cerrar sesión</a></li>
+            </ul>
+          </li>
+          {% else %}
+
+          <li class="dropdown"><a href="{% url 'main:blogs-upload' %}"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a class="nav-link scrollto" href="{% url 'main:login' %}">Iniciar Sesión</a></li>
+              <li><a class="nav-link scrollto" href="{% url 'main:register' %}">Registrar</a></li>
+            </ul>
+          </li>
+          
+          {% endif %}
+          
+        </ul>
+
+
+
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= hero Section ======= -->
+  <section id="hero">
+
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+      <div class="carousel-inner">
+
+        {% for p in portadas %}
+        {% if p == portadas.0 %}
+      
+        <div class="carousel-item active" style="background-image: url({{p.wallpaper.url}})">
+          <div class="carousel-container">
+            <div class="container">
+              <p class="animate__animated animate__fadeInUp">{{p.name}}</p>
+              <h2 class="animate__animated animate__fadeInDown">{{p.quote}}</h2>
+            </div>
+          </div>
+        </div>
+
+        {% else %}
+
+        <div class="carousel-item" style="background-image: url({{p.wallpaper.url}})">
+          <div class="carousel-container">
+            <div class="container">
+              <p class="animate__animated animate__fadeInUp">{{p.name}}</p>
+              <h2 class="animate__animated animate__fadeInDown">{{p.quote}}</h2>
+            </div>
+          </div>
+        </div>
+
+        {% endif %}
+        {% endfor %}      
+
+      </div>
+
+
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
+
+
+    </div>
+
+  </section><!-- End Hero Section -->
+
+  <main id="main">
+
+    <!-- ======= Services Section ======= -->
+    <div id="services" class="services-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline services-head text-center">
+              <h2>Menú de acciones</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <!-- Start Left services -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="https://mangaplus.shueisha.co.jp/manga_list/all">
+                    <i class="bi bi-play-btn-fill"></i>
+                  </a>
+                  <h4>Animes</h4>
+                  <p>
+                    Apasionate, mira y disfruta de tus animes favoritos, aprovecha la gran variedad de opciones que manga plus te ofrece para que la pases agusto.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="https://mangaplus.shueisha.co.jp/manga_list/all">
+                    <i class="bi bi-book-half"></i>
+                  </a>
+                  <h4>Mangas</h4>
+                  <p>
+                    ¿Aún no sale la nueva tomparada de esa seríe que tanto anhelas?, no pasa nada, mira ya los cientos de mangas que tenemos para ti, hasta puede que descubras cosas asombrosas.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="{% url 'main:blogs' %}">
+                    <i class="bi bi-newspaper"></i>
+                  </a>
+                  <h4>Blogs</h4>
+                  <p>
+                    Regosijate de algunos de los datos más interesantes de tus series de anime y manga favoritas.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="{% url 'main:reviews' %}">
+                    <i class="bi bi-chat-left-text-fill"></i>
+                  </a>
+                  <h4>Reviews</h4>
+                  <p>
+                    ¿Quieres emprender una nueva aventura?, aquí puedes encontrar los reviews de miles de usuarios para que puedas escoger tu nueva serie y la pases 10,000,000,000% fantastico.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <!-- End Left services -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="{% url 'main:blogs-upload' %}">
+                    <i class="bi bi-window-plus"></i>
+                  </a>
+                  <h4>Crea tus blogs</h4>
+                  <p>
+                    ¿Tienes muchas ideas o encontraste datos muy interesantes para dar a concer? Ven y crea tus blogs aquí.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <!-- End Left services -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="{% url 'main:reviews-upload' %}">
+                    <i class="bi bi-journal-plus"></i>
+                  </a>
+                  <h4>Crea tus reviews</h4>
+                  <p>
+                    ¿Qué piensas de la vida?, ¿Cómo estuvo ese nuevo capitulo?, ¿Qué se espera para la proxima temporada? para resolver esta y más dudas crea tus reviews y danos tu opinion, nos interesa a todos muchisimo.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Services Section -->
+
+
+    <!-- ======= Portfolio Section ======= -->
+    <div id="portfolio" class="portfolio-area area-padding fix">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>Portafolio de muestras</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row wesome-project-1 fix">
+
+          <!-- Start Portfolio -page -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">Todo</li>
+              <li data-filter=".filter-blog">Blogs</li>
+              <li data-filter=".filter-review">Reviews</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row awesome-project-content portfolio-container">
+
+          <!-- BLOGS -->
+          {% for b in blogs %}
+          {% if b == blogs.0 %}
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-blog portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="{% url 'main:blog' slug=b.slug %}"><img src="{{b.image.url}}" alt="" /></a>
+                
+                <div class="add-actions text-center">
+                
+                  <div class="project-dec">
+                    
+                    <a href="{% url 'main:blog' slug=b.slug %}">
+                      <h4>{{b.name}}</h4>
+                      <span>{{b.description}}</span>
+                    </a>
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>  
+          </div>
+
+          {% elif b == blogs.1 %}
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-blog portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="{% url 'main:blog' slug=b.slug %}"><img src="{{b.image.url}}" alt="" /></a>
+                
+                <div class="add-actions text-center">
+                
+                  <div class="project-dec">
+                    
+                    <a href="{% url 'main:blog' slug=b.slug %}">
+                      <h4>{{b.name}}</h4>
+                      <span>{{b.description}}</span>
+                    </a>
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>  
+          </div>
+
+          {% elif b == blogs.2 %}
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-blog portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="{% url 'main:blog' slug=b.slug %}"><img src="{{b.image.url}}" alt="" /></a>
+                
+                <div class="add-actions text-center">
+                
+                  <div class="project-dec">
+                    
+                    <a href="{% url 'main:blog' slug=b.slug %}">
+                      <h4>{{b.name}}</h4>
+                      <span>{{b.description}}</span>
+                    </a>
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>  
+          </div>
+          {% endif %}
+          <!-- portfolio-item end -->
+          {% endfor %}
+
+
+          <!-- REVIEWS -->
+          {% for r in reviews %}
+          {% if r == reviews.0 %}
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-review portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="{% url 'main:review' slug=r.slug %}"><img src="{{r.image.url}}" alt="" /></a>
+                
+                <div class="add-actions text-center">
+                
+                  <div class="project-dec">
+                    
+                    <a href="{% url 'main:review' slug=r.slug %}">
+                      <h4>{{r.name}}</h4>
+                      <span>{{r.description}}</span>
+                    </a>
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>  
+          </div>
+
+          {% elif r == reviews.1 %}
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-review portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="{% url 'main:review' slug=r.slug %}"><img src="{{r.image.url}}" alt="" /></a>
+                
+                <div class="add-actions text-center">
+                
+                  <div class="project-dec">
+                    
+                    <a href="{% url 'main:review' slug=r.slug %}">
+                      <h4>{{r.name}}</h4>
+                      <span>{{r.description}}</span>
+                    </a>
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>  
+          </div>
+
+          {% elif r == reviews.2 %}
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-review portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="{% url 'main:review' slug=r.slug %}"><img src="{{r.image.url}}" alt="" /></a>
+                
+                <div class="add-actions text-center">
+                
+                  <div class="project-dec">
+                    
+                    <a href="{% url 'main:review' slug=r.slug %}">
+                      <h4>{{r.name}}</h4>
+                      <span>{{r.description}}</span>
+                    </a>
+                    
+                  </div>
+                </div>
+                
+              </div>
+            </div>  
+          </div>
+          {% endif %}
+          <!-- portfolio-item end -->
+          {% endfor %}
+
+
+
+        </div>
+      </div>
+    </div><!-- End Portfolio Section -->
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>Manga Plus by Shueisha</strong>. All Rights Reserved
+              </p>
+            </div>
+            <div class="credits">
+              <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
+            -->
+              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
